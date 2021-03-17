@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 // 全局样式
 import './styles/index.less'
+import './utils/vant'
 
 Vue.config.productionTip = false
 
