@@ -5,7 +5,8 @@ import store from './store'
 // 全局样式
 import './styles/index.less'
 import './utils/vant'
-
+// 动态加载Rem基准
+import 'amfe-flexible'
 Vue.config.productionTip = false
 
 new Vue({

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <!-- 路由出口 -->
-   <van-button type="primary">主要按钮</van-button>
     <router-view/>
   </div>
 </template>
@@ -11,6 +10,10 @@ export default {
   name: 'App'
 }
 </script>
-<style lang="less">
-
+<style lang="less" scope>
+.box{
+  width: 750px;
+  height: 84px;
+  background-color: pink;
+}
 </style>
