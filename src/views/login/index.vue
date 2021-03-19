@@ -1,7 +1,9 @@
 <template>
     <div class="login-container">
       <!-- 导航栏 -->
-      <van-nav-bar class="page-nav-bar" title="登录" />
+      <van-nav-bar class="page-nav-bar" title="登录">
+        <van-icon slot="left" name="cross" @click="$router.back()"></van-icon>
+      </van-nav-bar>
       <!-- 表单 -->
       <van-form @submit="onSubmit" ref="loginForm">
         <van-field
@@ -79,6 +81,8 @@ export default {
         this.$toast.success('登录成功...')
         // console.log(res.data, 'vuex传进去没')
         this.$store.commit('setUser', res.data)
+        // 不严谨
+        this.$router.back()
       } catch (err) {
         if (err.response.status === 400) {
           this.$toast.fail('手机号或者验证码错误')
