@@ -6,12 +6,9 @@
       </van-nav-bar>
       <!-- tab切换 -->
       <van-tabs class="channel-tabs" v-model="active" animated swipeable>
-        <van-tab title="标签 1">内容 1</van-tab>
-        <van-tab title="标签 2">内容 2</van-tab>
-        <van-tab title="标签 3">内容 3</van-tab>
-        <van-tab title="标签 4">内容 4</van-tab>
-        <van-tab title="标签 4">内容 4</van-tab>
-        <van-tab title="标签 4">内容 4</van-tab>
+        <van-tab v-for="channel in channels" :key="channel.id" :title="channel.name">
+          <ArticleList :channel="channel"></ArticleList>
+        </van-tab>
         <div slot="nav-right" class="placeholder"></div>
         <div slot="nav-right" class="hamburger-btn">
           <i class="toutiao toutiao-gengduo"></i>
@@ -21,20 +18,38 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { getuserChannels } from '@/api/user'
+import ArticleList from './components/article-list'
 export default {
   data () {
     return {
-      active: 0
+      active: 0,
+      channels: []
     }
   },
-  created () {},
-  components: {},
-  methods: {}
+  created () {
+    this.loadChannels()
+  },
+  components: {
+    ArticleList
+  },
+  methods: {
+    async loadChannels () {
+      try {
+        const { data } = await getuserChannels()
+        this.channels = data.data.channels
+        console.log(this.channels, '获取成功')
+      } catch (error) {
+        this.$toast('获取频道数据失败')
+      }
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .home-container{
+  padding-bottom: 100px;
   /deep/.van-nav-bar__title{
     max-width: unset;
   }
